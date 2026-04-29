@@ -1,0 +1,44 @@
+file(GLOB_RECURSE SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+add_executable(modern_dx11_base WIN32 ${SRC_FILES})
+
+set(DXSDK_DIR $ENV{DXSDK_DIR})
+
+target_include_directories(modern_dx11_base PRIVATE "${DXSDK_DIR}/Include")
+target_include_directories(modern_dx11_base PRIVATE "${DXSDK_DIR}/Lib/x64")
+
+target_include_directories(modern_dx11_base PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
+target_include_directories(modern_dx11_base PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/source")
+
+target_precompile_headers(modern_dx11_base PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/pch.h")
+target_link_libraries(modern_dx11_base PRIVATE
+    imgui
+
+    dwmapi.lib
+    winmm.lib
+
+    d3d11.lib
+    dxgi.lib
+)
+
+set(CXX_OPTIONS
+    /W4
+    /WX
+    /MP
+    /FC
+    /std:c++latest
+
+    /permissive-
+    /Zc:__cplusplus
+    /EHsc
+    /nologo
+)
+
+target_compile_options(modern_dx11_base PRIVATE
+    ${CXX_OPTIONS}
+
+    $<$<CONFIG:Debug>:/Zi /Od /RTC1>
+    $<$<CONFIG:Release>:/O2 /Gy /DNDEBUG>
+)
+
+target_compile_definitions(modern_dx11_base PRIVATE _MBCS)
