@@ -7,8 +7,6 @@ so basically why i made this is because most released "dx11-imgui-bases" are rea
 it features a high precision timer because most people just use "std::this_thread::sleep_for(std::chrono::milliseconds(1))", which has timer resolution problems
 aka 15.6ms off on windows lol so feel free to use it as a learning project, its also written in modern c++ and not some 2014 ahhh.
 
-A clean, minimal DirectX 11 overlay base written in C++23. Transparent fullscreen window, Dear ImGui integration, and a simple render callback everything you need to start building without the boilerplate.
-
 ---
 
 ## Features
